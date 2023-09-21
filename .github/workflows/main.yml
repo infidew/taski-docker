@@ -65,23 +65,23 @@ jobs:
           tags: infidew/taski-backend:latest
 
 
-  fronted_tests:
+  frontend_tests:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: action/checkout@v3
+    - uses: actions/checkout@v3
     - name: Set up nodeJS
       uses: actions/setup-node@v3
       with:
         node-version: 18
-    
+
     - name: Install dependencies
       run: |
         cd frontend/
         npm ci
-    
+
     - name: Test frontend
-    run: |
+      run: |
         cd frontend/
         npm run test
 
@@ -106,6 +106,7 @@ jobs:
           context: ./frontend/
           push: true
           tags: infidew/taski_frontend:latest
+
 
   build_gateway_and_push_to_docker_hub:
     name: Push gateway Docker image to DockerHub
